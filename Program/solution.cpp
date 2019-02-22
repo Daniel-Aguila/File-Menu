@@ -22,8 +22,10 @@ int main() {
     cout << "Input direct/relative file Path: ";
     cin >> fileInput;
     cout << endl;
+    //Open the files
     ifstream inStream(fileInput);
     ofstream writeFile("output.txt");
+    //Check for fails
     if(inStream.fail()){
         cerr << "ERROR: OPENING FILE\n";
     }
@@ -36,6 +38,7 @@ int main() {
                 "\t5) Reverse order of lines\n"
                 "Enter option number: ";
         cin >> option;
+        //Call function base on option
         switch (option) {
             case 1:
                 getRidofWhite(inStream, writeFile);
@@ -57,6 +60,7 @@ int main() {
                 break;
         }
     }
+    //Close files
     writeFile.close();
     inStream.close();
     return 0;
@@ -64,6 +68,7 @@ int main() {
 
 void getRidofWhite(ifstream& file, ofstream& write){
     string line;
+    //Remove white spaces
     while(getline(file, line)) {
         line.erase(remove(line.begin(),line.end(),' '), line.end());
         write << line << endl;
@@ -72,6 +77,7 @@ void getRidofWhite(ifstream& file, ofstream& write){
 void amountOfCharacters(ifstream& file, ofstream& write){
     string temp;
     long int cnt = 0;
+    //Count for characters in the files
         while(getline(file, temp)){
         temp.erase(remove(temp.begin(),temp.end(),' '), temp.end());
         cnt += temp.length();
@@ -81,6 +87,7 @@ void amountOfCharacters(ifstream& file, ofstream& write){
 void amountOfWords(ifstream& file, ofstream& write){
     string temp;
     long cnt = 0;
+    //Count for words in the files
     while(file >> temp){
         cnt++;
     }
@@ -88,6 +95,7 @@ void amountOfWords(ifstream& file, ofstream& write){
 }
 void replaceVowels(ifstream& file, ofstream& write) {
     string word;
+    //Replace vowels with 3's
     while(getline(file, word)){
         for(unsigned int i = 0; i < word.length(); i++) {
             switch (word[i]) {
@@ -111,6 +119,7 @@ void replaceVowels(ifstream& file, ofstream& write) {
         }
     }
 void reverseOrderLines(ifstream& file, ofstream& write){
+    //Reverse the order of lineS
     string temp;
     string reverse;
     while(getline(file, temp)){
